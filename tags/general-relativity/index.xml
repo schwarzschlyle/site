@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>General Relativity on Lyle Kenneth</title>
+    <link>https://schwarzschlyle.github.io/portfolio/tags/general-relativity/</link>
+    <description>Recent content in General Relativity on Lyle Kenneth</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 24 Jun 2022 11:00:59 -0400</lastBuildDate><atom:link href="https://schwarzschlyle.github.io/portfolio/tags/general-relativity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Warped and Weird</title>
+      <link>https://schwarzschlyle.github.io/portfolio/post/gr-overview/</link>
+      <pubDate>Fri, 24 Jun 2022 11:00:59 -0400</pubDate>
+      
+      <guid>https://schwarzschlyle.github.io/portfolio/post/gr-overview/</guid>
+      <description>Insert famous quote regarding mathematical modeling
+Finish L26, summarize here in one article.
+Focused required time: 1 day
+Link to GitHub Repository</description>
+    </item>
+    
+  </channel>
+</rss>

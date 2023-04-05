@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>The Lynx and the Hare | Lyle Kenneth</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Predator-prey system: a quick tour of mathematical modeling">
+    <meta name="generator" content="Hugo 0.111.3">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="https://schwarzschlyle.github.io/portfolio/ananke/css/main.min.css" >
+
+
+
+    
+    
+    
+      
+
+    
+
+    
+    
+    <meta property="og:title" content="The Lynx and the Hare" />
+<meta property="og:description" content="Predator-prey system: a quick tour of mathematical modeling" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://schwarzschlyle.github.io/portfolio/post/lotka-volterra/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-06-24T11:00:59-04:00" />
+<meta property="article:modified_time" content="2022-06-24T11:00:59-04:00" /><meta property="og:site_name" content="Lyle Kenneth" />
+<meta itemprop="name" content="The Lynx and the Hare">
+<meta itemprop="description" content="Predator-prey system: a quick tour of mathematical modeling"><meta itemprop="datePublished" content="2022-06-24T11:00:59-04:00" />
+<meta itemprop="dateModified" content="2022-06-24T11:00:59-04:00" />
+<meta itemprop="wordCount" content="1410">
+<meta itemprop="keywords" content="Mechanistic Model," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="The Lynx and the Hare"/>
+<meta name="twitter:description" content="Predator-prey system: a quick tour of mathematical modeling"/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  
+  <header class="cover bg-top" style="background-image: url('https://schwarzschlyle.github.io/portfolio/images/abstract-hare-lynx.jfif');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://schwarzschlyle.github.io/portfolio/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        Lyle Kenneth
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://schwarzschlyle.github.io/portfolio/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://schwarzschlyle.github.io/portfolio/post/" title="Articles page">
+              Articles
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://schwarzschlyle.github.io/portfolio/contact/" title="Contact page">
+              Contact
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="https://schwarzschlyle.github.io/portfolio/post2/" title="Projects page">
+              Projects
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+<div class="ananke-socials">
+  
+    <a href="https://github.com/" target="_blank" class="github ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="GitHub link" rel="noopener" aria-label="follow on GitHub——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title">The Lynx and the Hare</h1>
+          
+            <h2 class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4">
+              Predator-prey system: a quick tour of mathematical modeling
+            </h2>
+          
+        
+      </div>
+    </div>
+    <!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+  </head>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+  ...
+</html>
+
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        ARTICLES
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+      
+      <a href="https://www.facebook.com/sharer.php?u=https://schwarzschlyle.github.io/portfolio/post/lotka-volterra/" class="ananke-social-link facebook no-underline" aria-label="share on Facebook">
+        
+        <span class="icon"> <svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M28.765,50.32h6.744V33.998h4.499l0.596-5.624h-5.095  l0.007-2.816c0-1.466,0.14-2.253,2.244-2.253h2.812V17.68h-4.5c-5.405,0-7.307,2.729-7.307,7.317v3.377h-3.369v5.625h3.369V50.32z   M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+        
+      </a>
+    
+      
+      <a href="https://twitter.com/share?url=https://schwarzschlyle.github.io/portfolio/post/lotka-volterra/&amp;text=The%20Lynx%20and%20the%20Hare" class="ananke-social-link twitter no-underline" aria-label="share on Twitter">
+        
+        <span class="icon"> <svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+        
+      </a>
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">The Lynx and the Hare</h1>
+      
+      <p class="tracked">
+        By <strong>Lyle Kenneth</strong>
+      </p>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2022-06-24T11:00:59-04:00">June 24, 2022</time>
+      
+
+      
+      
+        <span class="f6 mv4 dib tracked"> - 7 minutes read </span>
+        <span class="f6 mv4 dib tracked"> - 1410 words </span>
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><figure><img src="https://schwarzschlyle.github.io/portfolio/lotka-manim-crop.gif"/>
+</figure>
+
+<blockquote>
+<p>Insert famous quote regarding mathematical modeling</p>
+</blockquote>
+<h2 id="introduction">Introduction</h2>
+<p><strong>W</strong>e use a lot of tools to make sense of the world around us. Even without the advent of mathematics, people have been leveraging problem solving techniques, knowingly or unknowingly in one form or another, to provide solutions to problems or rationalizations to phenomena.</p>
+<p>For instance, our parents may have advised us not to shower in the rain as they have associated this with sickness. The patterns that they have seen on people getting sick when soaked in rainwater led to the conception of a model usually even without the need to give explanation as to <em>why</em> it happens. It just does. This simple fact exposition becomes a model from which a solution emerges.</p>
+<p>Of course, such simplistic model can be prone to inaccuracy; people may not necessariliy get sick when soaked in the rain or people may get sick but may not be directly because of the rain itself. Mathematics provides a way of creating models systematically in which its accuracy (and inaccuracy) can be properly quantified.</p>
+<h2 id="general-steps-in-constructing-a-mathematical-model">General steps in constructing a mathematical model</h2>
+<p>In this article, you will experience a brief tour of what a mathematical model looks like and how it is used to answer questions using <em>Python</em>.</p>
+<figure><img src="https://schwarzschlyle.github.io/portfolio/images/hare-lynx-reim.jpg"/>
+</figure>
+
+<p>Consider a predator-prey system involing lynxes as predators and hares as prey. Will hares go extinct if lynxes continue to pursue the former as a primary food sources? Will lynxes also decrease in number when the population of hares diminishes?  We shall attempt to provide answers to these pressing questions by (i) properly defining a problem in terms of mathematical notations, (ii) constructing models to fit the phenomena, and (iii) making inferences and conclusions from the model.</p>
+<h2 id="1-define-your-problem-mathematically">1. <strong>Define your problem mathematically</strong></h2>
+<p>Trust me, properly defining a problem in terms of mathematical statements is a crucial art. Failure to do so eliminates the purpose of constructing any model. In essence, we need deal with our analysis in the arena of mathematics and borrowing its convenient toolkit for our convenience.</p>
+<p>This is done by defining the <strong>SQM</strong> elements: <strong>S</strong>ystem, <strong>Q</strong>uestion, and <strong>M</strong>athematical statements.</p>
+<h3 id="heading"></h3>
+<h3 id="system"><strong>S</strong>ystem</h3>
+<p>For our predator-prey example, we can start by defining the following quantities.</p>
+<p>Let $l(t)$ be the number of lynxes at some time $t$</p>
+<p>Let $h(t)$ be the number of hares at some time $t$</p>
+<p>With these, we can quantify the states of the system using the variables $l(t)$ denoting lynx population, $h(t)$ denoting hare population, and $t$ denoting the period which can be assigned to be the year when the population ecology survey was measured. For instance, the statements</p>
+<ol>
+<li>At the year 1845, the lynx population is at 30,090 and the hare population is at 19,580</li>
+<li>At the year 1846, the lynx population is at 45,150 and the hare population is at 19,600</li>
+</ol>
+<p>can be contracted compactly as</p>
+<ol>
+<li>$l(1845) = 30,090$ and $h(1845) = 19,580$</li>
+<li>$l(1846) = 45,150$ and $h(1846) = 19,600$</li>
+</ol>
+<p>Now, we have defined a mathematical machine that takes in the year as input and gives us the population of both lynx and hares as output denoted by the functions $l(t)$ and $h(t)$, respectively. These functions are called the <em>state variables</em> of the system.</p>
+<p>Don&rsquo;t be fooled. It may be as simple as simply defining that state variables of interests are, of course, the number of lynxes and hares. However, it may be tricky in many practical problems.</p>
+<p>Physicists usually draw tons of diagrams, employing symmetries, identities, and mathematical gymnastics to properly pin down state variables which appropriately describes a system.</p>
+<p>Data analysis in the context of business requires domain-specific intuitions to appropriately define business metrics.</p>
+<p>For our purposes in this mini-project, our next task is to convert our desired questions regarding the populations as a mathematical inquiry regarding these two functions.</p>
+<h3 id="question"><strong>Q</strong>uestion</h3>
+<p>After formulating our mathematical system, we shall now convert our question into a mathematical inquiry. For example, if we want to know if an extinction event happens at some point in time in the future, we have to ask the following:</p>
+<blockquote>
+<p>Would a $t$ exists where $h(t)=0$ and/or $l(t)=0$ ?</p>
+</blockquote>
+<p>Suppose we want to find out what happens in the population of the lynxes and hares at some long-term future, then we simply want to find out the following</p>
+<blockquote>
+<p>Find the limits $\lim_{t\to\infty}l(t)$ and $\lim_{t\to\infty}h(t)$</p>
+</blockquote>
+<p>Now that we have properly defined our our state variables and some questions regarding these state variables, we proceed to find out the associated mathematical statements which may lead us to some possible answers.</p>
+<h3 id="mathematical-statements"><strong>M</strong>athematical statements</h3>
+<p>There are two general ways of constructing a mathematical model:</p>
+<ul>
+<li><strong>Mechanistic models</strong> can be constructed if some mathematical statements are based on a priori information about the system.</li>
+</ul>
+<p>For example, physics theories such as classical mechanics are governed by physical laws that are usually expressed in the language of <em>differential equations</em>.</p>
+<p>Predicting the motion of a ball thrown by a basketball player given knowledge about the initial conditions (initial position, initial velocity, and  mass of the ball) can be achieved using Newton&rsquo;s laws -  a mathematical statement which fully describe the ball&rsquo;s future and can be expressed as</p>
+<p>$$
+\frac{\text{d}^2\vec{x}}{\text{d}t^2} = \frac{\vec{F}}{m}
+$$</p>
+<p>Basically, a set of mathematical statements already exists to describe a system where you can use to supply answers to a set of desired questions. With these, mechanistic models are also called <em>white-box models</em>. The realm of physics is essentially one giant compilation of mechanistic models encoding the laws of nature.</p>
+<p>A typical workflow for construct these kinds of model is to find out an appropriate set of differential equations governing a system (or even deriving your own), solving them through various techniques, and analyzing the solution as a proxy for the actual phenomena.</p>
+<ul>
+<li><strong>Phenomenological models</strong> can be constructed if there are no a priori information about the system - no pre-existing differential equations to govern its dynamics.</li>
+</ul>
+<p>One can, instead, construct a model based on experimental data only usually described in the language <em>statistics</em>. A commonly used method is the least-square linear regression where a line of best fit is used to model a set of data which corresponds to the least amount of errors. These form of modeling is mainly used for data science and machine learning algorithms.</p>
+<p>A typical workflow would be to clean a dataset, construct a machine learning model, and use that model to provide insights regarding the data typically in the context of a business use-case to predict prices or to categorize objects, for example.</p>
+<p>Let&rsquo;s go back to our specific example: the predator-prey system. Luckily for us, clever people already got their hands dirty and gave us a neat differential equation for this system. Such equation is called the <strong>Lotka-Volterra model</strong> which can be expressed as</p>
+<p>$$
+\frac{\text{d}h(t)}{\text{d}t} = \alpha h(t) - \beta h(t) l(t)
+$$
+$$
+\frac{\text{d}l(t)}{\text{d}t} = \delta h(t) l(t) - \gamma l(t)
+$$</p>
+<p>Evidently, we will be dealing with a mechanistic model. In theory, this is all that we need, mathematically, to model the population of both lynxes and hares for all instant in time. In practice, however, we still need to unpack the the system of equations imply and express it in a form that is conveniently accessible.</p>
+<p>Students sometimes sardonically say that a problem is already considered solved when you have set things up by defining appropriate state variables and finding out the relevant mathematical statements governing these variables. The rest are simply &ldquo;just maths&rdquo;. While this may be true for textbook problems which often have simple analytic solution, non-ideal problems often requires much more mathematical trickery to access the desired model from these statements.</p>
+<h2 id="2-model-construction-and-exploration">2. <strong>Model construction and exploration</strong></h2>
+<h3 id="heading-1"></h3>
+<p>(Initial discussion on why we learn maths)</p>
+<p>(Only choose parameters when necessary)</p>
+<h3 id="exploratory-descriptive-analysis">Exploratory descriptive analysis</h3>
+<ul>
+<li>Initialization python codes</li>
+<li>Coding the vector plot</li>
+<li>Analyzing the vector plot</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Mathematica" data-lang="Mathematica"><span style="display:flex;"><span>x[t_]<span style="color:#f92672">:=</span><span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><figure><img src="https://schwarzschlyle.github.io/portfolio/images/eda-plot.jpg"/>
+</figure>
+
+<figure><img src="https://schwarzschlyle.github.io/portfolio/gifs/eda1.gif"/>
+</figure>
+
+<figure><img src="https://schwarzschlyle.github.io/portfolio/gifs/eda2.gif"/>
+</figure>
+
+<figure><img src="https://schwarzschlyle.github.io/portfolio/gifs/eda3.gif"/>
+</figure>
+
+<figure><img src="https://schwarzschlyle.github.io/portfolio/gifs/eda4.gif"/>
+</figure>
+
+<h3 id="perturbation-analysis">Perturbation analysis</h3>
+<ul>
+<li>Perturbation theory explanation</li>
+<li>Coding perturbation theory</li>
+<li>Explanation of results</li>
+<li>Coding the vector plots of results</li>
+<li>Analyzing the vector plots</li>
+<li>Plot time-series plots for h(t) and l(t): one for each fixed point.</li>
+</ul>
+<h3 id="linearization">Linearization</h3>
+<ul>
+<li>Linearization theory</li>
+<li>Coding the Jacobian calculator</li>
+<li>Jacobian analysis</li>
+<li>Show that this is the same with perturbation results.</li>
+<li>Use dynamical systems fixed points classification and rationalize initial EDA vector plots</li>
+<li>Plot parameter space with fixed-point classification boundaries.</li>
+</ul>
+<h3 id="rk4-numerical-solution">RK4 numerical solution</h3>
+<ul>
+<li>Pick a set of parameters.</li>
+<li>Pick initial value for each fixed points.</li>
+<li>Solve the two systems: one for each fixed point.</li>
+<li>Plot time-series plots for h(t) and l(t): one for each fixed point.</li>
+</ul>
+<h2 id="3-make-assessments-and-infer-conclusions">3. <strong>Make assessments and infer conclusions.</strong></h2>
+<ul>
+<li>Import real data</li>
+<li>Write conclusion</li>
+</ul>
+<p><a href="https://github.com/PlayingNumbers/ds_salary_proj">Link to GitHub Repository</a></p>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="https://schwarzschlyle.github.io/portfolio/tags/mechanistic-model" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Mechanistic Model</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">What&#39;s in this post</p>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#general-steps-in-constructing-a-mathematical-model">General steps in constructing a mathematical model</a></li>
+    <li><a href="#1-define-your-problem-mathematically">1. <strong>Define your problem mathematically</strong></a>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#system"><strong>S</strong>ystem</a></li>
+        <li><a href="#question"><strong>Q</strong>uestion</a></li>
+        <li><a href="#mathematical-statements"><strong>M</strong>athematical statements</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-model-construction-and-exploration">2. <strong>Model construction and exploration</strong></a>
+      <ul>
+        <li><a href="#heading-1"></a></li>
+        <li><a href="#exploratory-descriptive-analysis">Exploratory descriptive analysis</a></li>
+        <li><a href="#perturbation-analysis">Perturbation analysis</a></li>
+        <li><a href="#linearization">Linearization</a></li>
+        <li><a href="#rk4-numerical-solution">RK4 numerical solution</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-make-assessments-and-infer-conclusions">3. <strong>Make assessments and infer conclusions.</strong></a></li>
+  </ul>
+</nav>
+  </div>
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">Related</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="https://schwarzschlyle.github.io/portfolio/post/perturbation/">Close Enough</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="https://schwarzschlyle.github.io/portfolio/post/dimensional-analysis/">The Art of Guessing</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="https://schwarzschlyle.github.io/portfolio/post/sir-model/">Covid</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="https://schwarzschlyle.github.io/portfolio/post/pde-sim/">Crank-Nicolson</a>
+        </li>
+	    
+    </ul>
+</div>
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://schwarzschlyle.github.io/portfolio/" >
+    &copy;  Lyle Kenneth 2023 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+    <a href="https://github.com/" target="_blank" class="github ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="GitHub link" rel="noopener" aria-label="follow on GitHub——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
